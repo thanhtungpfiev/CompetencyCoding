@@ -1,0 +1,9 @@
+1. 1stProblem - 81. Search in Rotated Sorted Array II (Leet code)
++ Native search => O(n)
++ Binary search => O(logn) (mid = target break; mid < target start = mid + 1; mid > target end = mid - 1)
+	=> 2 dãy sắp xếp tăng dần => Phần tử start của dãy 1 luôn luôn lớn hơn các phần tử của dãy 2
+	=> Xét vị trí của mid (start + (end - start) / 2) và target xem đang nằm trong dãy nào để tìm ra khoảng binary search kế tiếp
+	=> Các phần tử trùng nhau => không thể áp dụng binary search => so sánh với phần tử start => nếu bằng thì tăng start lên 1 để có khoảng binary search kế tiếp 
+	
+2. 2ndProblem - 33. Search in Rotated Sorted Array (Leet code)
++ Binary search => find the index of pivot => compare with last index value (vì dãy tách thành 2 dãy tăng dần, phần tử cuối là phần tử lớn nhất của dãy nhỏ, phần tử chốt là phần tử lớn nhất trong toàn dãy)
