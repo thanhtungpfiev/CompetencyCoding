@@ -7,3 +7,13 @@
 	
 2. 2ndProblem - 33. Search in Rotated Sorted Array (Leet code)
 + Binary search => find the index of pivot => compare with last index value (vì dãy tách thành 2 dãy tăng dần, phần tử cuối là phần tử lớn nhất của dãy nhỏ, phần tử chốt là phần tử lớn nhất trong toàn dãy)
+
+3. 3rdProblem - 5. Longest Palindromic Substring (Leet code)
++ Exhaustive search => Lấy từng chuỗi O(n^2) => Kiểm tra xem chuỗi có phải là palindromic không O(n) => Chi phí là O(n^3)
++ Giảm không gian tìm kiếm
+	+ Dùng biến giữ giá trị lớn nhất của chuỗi con hiện tại, nếu cấu hình kiểm tra có độ dài nhỏ hơn thì bỏ qua.
++ Sắp xếp lại không gian tìm kiếm
+	+ Bắt đầu tìm từ chuỗi dài nhất rùi giảm dần đến chuỗi nhỏ hơn
++ DP => P[i,j] = P[i + 1, j - 1] && s[i] == s[j]
+		P[i,i] = true
+		P[i, i + 1] = (s[i] == s[i + 1])
