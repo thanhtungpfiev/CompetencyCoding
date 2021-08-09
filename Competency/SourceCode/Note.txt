@@ -14,6 +14,26 @@
 	+ Dùng biến giữ giá trị lớn nhất của chuỗi con hiện tại, nếu cấu hình kiểm tra có độ dài nhỏ hơn thì bỏ qua.
 + Sắp xếp lại không gian tìm kiếm
 	+ Bắt đầu tìm từ chuỗi dài nhất rùi giảm dần đến chuỗi nhỏ hơn
-+ DP => P[i,j] = P[i + 1, j - 1] && s[i] == s[j]
-		P[i,i] = true
-		P[i, i + 1] = (s[i] == s[i + 1])
++ DP 
+	P[i,i] = true // 1 letter
+	P[i, i + 1] = (s[i] == s[i + 1]) // 2 letters
+	P[i,j] = P[i + 1, j - 1] && s[i] == s[j] // >= 3 letters
+		
+4. 4thProblem - REPROAD - Repair road (spoj)
++ Exhaustive search => Lấy từng cấu hình O (n^2) => Kiểm tra xem độ dài cấu hình (đoạn đang xét) có lớn hơn max && kiểm tra đoạn đó có phải là đoạn thỏa mãn lượng số 0 < K (cost) hay không
++ Stack 
+Dùng tham lam: Nhận xét thấy rằng việc khác nhau giữa hai cấu hình hợp lệ (i1,j1) và (i2, j2)
+trong đó i1 <i2, j1 < j2 phải thỏa mãn: Số số 0 nằm trong khoảng i1 đến i2 nhỏ hơn hoặc bằng số
+số 0 nằm trong j1 đến j2.
+Do đó, việc tính toán cấu hình tiếp theo từ cấu hình hiện có (i1, j1) bằng cách tăng i1 lên thành i2
+với số số 0 nằm trong i1 và i2 là 1 số 0. Tương tự với j1 và j2.
+Cấu hình đầu tiên hợp lệ là cấu hình đã sửa K đoạn hỏng đầu tiên.
+Bằng cách stack lại các vị trí của i, ta có thể loại bỏ việc tìm i2 -> giảm độ phức tạp xuống còn
+O(n)
+
+=> 1 vòng for duyệt toàn bộ dãy => Kiểm tra phần tử đó là 0 hay 1
+	=> Nếu là 0 => nếu cost < K => tăng cost và len lên 1 đơn vị
+					nếu không => tính lại đoạn khác len = i - q.front(), q.pop_front(); (số 0 mới đc đưa vào vị trí neo sau khi K lần sửa đã được áp dụng)
+				đưa i vào stack là mốc của số 0 hiện tại
+	+ Nếu không thì tăng len lên (vì đoạn đó là 1)
+	+ Check kết quả bằng max của len và kết quả
