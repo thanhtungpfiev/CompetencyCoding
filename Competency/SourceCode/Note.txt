@@ -74,3 +74,4 @@ Tương tự bài toán 5 nhưng tốt nhất nên dùng thuật toán quay lui 
 	+ Chia đôi dãy, dùng map (Liệt kê tất cả các dãy con của n/2) => kiểm tra từng dãy có tổng nào chọn được bằng nhiều số K không => Tổng hợp lại. Nếu từng dãy có value sum = -2 thì bỏ, không thì tính số lượng phần tử hiện tại bằng tổng, kiểm tra giá trị trước xem có khác không, nếu khác thì cho là -2, không thì lưu lại.
 		Lưu ý trong lúc sinh phải kiếm tra tổng bằng 0 có hình thành bằng các phần tử 0 không, nếu có thì cho bằng -2, không thì cho bằng 0.
 		Các tổng khác 0 thì sẽ kiểm tra xem đã update vào map chưa, nếu chưa thì lưu value bằng số lượng phần tử, nếu rồi thì lưu value = -2
+10. 10th Problem - QuickSort
