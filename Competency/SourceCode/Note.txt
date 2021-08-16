@@ -37,3 +37,40 @@ O(n)
 				đưa i vào stack là mốc của số 0 hiện tại
 	+ Nếu không thì tăng len lên (vì đoạn đó là 1)
 	+ Check kết quả bằng max của len và kết quả
+
+5. 5thProblem - Liệt kê cấu hình cho bài toán n!
+	+ Phương pháp sinh
+		Khởi đầu với 1 cấu hình tăng dần từ 1 -> n (nhưng khi code thì nên tạo mảng có n + 1 phần tử, với phần tử đầu tiên là 0)
+		Tìm dãy con giản dần dài nhất
+		Tim phần tử đầu tiên trong dãy con đó lớn hơn i - 1 (phần tử đứng kế ngày trc dãy con)
+		Đảo 2 phần tử cho nhau
+		Đổi dãy con giảm dần thành dãy con tăng dần
+		Kết thúc khi dãy toàn phần tử giảm dần
+	+ Quay lui
+		Dùng 1 mảng đánh dấu
+		Thử từ 1
+		Duyệt từ v = 1 -> n
+		Neu mark[v] chưa đánh dấu => gán giá trị => Nếu là cấu hình cuối (i == n) => In giá trị
+														Nếu không => Đánh dấu phần tử thứ v là đã chọn => Thử với i + 1 => Bỏ đánh dấu phần tử thứ v
+6. 6thProblem - Liệt kê cấu hình cho bài toán Akn (n!/)n-k)!)
+Tương tự bài toán 5 nhưng tốt nhất nên dùng thuật toán quay lui với điều kiên thay n bằng k ở cấu hình cuối
+
+7. 7th Problem - Liệt kê cấu hình cho bài toán Ckn = Akn/n!
+	+ Phương pháp sinh
+		1. Tìm từ cuối lên đầu dãy cho đến khi gặp phần tử x(i) chưa đạt giới hạn trên n - k + i.
+		2. Tăng x(i) lên một đơn vị.
+		3. Đặt lại tất cả các phần tử phía sau bằng giới hạn dưới.
+	+ Quay lui
+		Xét tất cả các cách chọn x1 từ 1 (x0 + 1) đến n - k + 1, với mỗi giá trị đó xét tất cả các lựa chọn x2 từ x1+1 đến n - k + 2, ...., cứ như vậy đến x(k) thì ta có cấu hình cần liệt kê.
+		=> giá trị v chạy từ x[i - 1] + 1 -> n - k + i
+		Thử từ 1 -> n
+		
+8. 8th Problem - Liệt kê dãy nị phân có độ dài n
+	+ Quay lui
+		Giá trị gán v chạy trong khoảng 0, 1
+		Thử từ i = 1 -> n
+9. 9th Problem - https://www.spoj.com/problems/BURGLARY/
+	+ Liệt kê 2^n dãy nhị phân, với 1 ứng với phần tử j đc chọn, và 0 không được chọn
+	+ Chia đôi dãy, dùng map (Liệt kê tất cả các dãy con của n/2) => kiểm tra từng dãy có tổng nào chọn được bằng nhiều số K không => Tổng hợp lại. Nếu từng dãy có value sum = -2 thì bỏ, không thì tính số lượng phần tử hiện tại bằng tổng, kiểm tra giá trị trước xem có khác không, nếu khác thì cho là -2, không thì lưu lại.
+		Lưu ý trong lúc sinh phải kiếm tra tổng bằng 0 có hình thành bằng các phần tử 0 không, nếu có thì cho bằng -2, không thì cho bằng 0.
+		Các tổng khác 0 thì sẽ kiểm tra xem đã update vào map chưa, nếu chưa thì lưu value bằng số lượng phần tử, nếu rồi thì lưu value = -2
