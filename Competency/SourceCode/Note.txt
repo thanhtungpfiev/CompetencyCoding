@@ -69,9 +69,64 @@ Tương tự bài toán 5 nhưng tốt nhất nên dùng thuật toán quay lui 
 	+ Quay lui
 		Giá trị gán v chạy trong khoảng 0, 1
 		Thử từ i = 1 -> n
+
 9. 9th Problem - https://www.spoj.com/problems/BURGLARY/
 	+ Liệt kê 2^n dãy nhị phân, với 1 ứng với phần tử j đc chọn, và 0 không được chọn
 	+ Chia đôi dãy, dùng map (Liệt kê tất cả các dãy con của n/2) => kiểm tra từng dãy có tổng nào chọn được bằng nhiều số K không => Tổng hợp lại. Nếu từng dãy có value sum = -2 thì bỏ, không thì tính số lượng phần tử hiện tại bằng tổng, kiểm tra giá trị trước xem có khác không, nếu khác thì cho là -2, không thì lưu lại.
 		Lưu ý trong lúc sinh phải kiếm tra tổng bằng 0 có hình thành bằng các phần tử 0 không, nếu có thì cho bằng -2, không thì cho bằng 0.
 		Các tổng khác 0 thì sẽ kiểm tra xem đã update vào map chưa, nếu chưa thì lưu value bằng số lượng phần tử, nếu rồi thì lưu value = -2
+
 10. 10th Problem - QuickSort
+
+11. 11th Problem - Searching
+	+ Sequence search - Tìm kiềm lần lượt dãy khóa -> O(n)
+	+ Binay search -> Dãy khóa đã sắp xếp -> Chia đôi dãy khóa để tìm -> O(logn) 
+		mid = start + (end - start) / 2
+		while (start <= end) search key and update start/end bằng mid
+
+12. 12th Problem - Merge sort - TopDown 
+	if (i < iMiddle && (j >= iEnd || A[i] < A[j])) { //nếu dãy bên trái vẫn còn phần tử kết hợp với dãy bên phải hết phần tử hoặc cả hai dãy vẫn còn phần tử nhưng phần tử bên trái nhỏ hơn phần tử bên phải.
+	
+13. 13th Problem - Tìm tập con liên tục có tổng lớn nhất
+	+ Vét cạn -> tính tổng từng tập con -> tìm tập có tổng lớn nhất -> O(n^3)
+	+ Áp dụng chia để trị ta có thể giải bài toán này theo cách sau:
+
+Chia mảng ban đầu thành hai mảng
+Trả ra tổng lớn nhất của:
+Tổng lớn nhất của mảng bên trái (bằng cách gọi đệ quy)
+Tổng lớn nhất của mảng bên phải (bằng cách gọi đệ quy)
+Tổng lớn nhất của mảng gồm phần tử cả phần tử ở giữa
+	+ Thuật toán Kadane
+	
+Initialize:
+    max_so_far = INT_MIN
+    max_ending_here = 0
+
+Loop for each element of the array
+  (a) max_ending_here = max_ending_here + a[i]
+  (b) if(max_so_far < max_ending_here)
+            max_so_far = max_ending_here
+  (c) if(max_ending_here < 0)
+            max_ending_here = 0
+return max_so_far
+
+14. 14th Problem - Tìm cặp điểm gần nhất
+	+ Vét cạn -> Tìm khoảng cách của từng cặp điềm -> O(n^2) -> Chú ý tọa độ x, y theo kiểu long
+	
+15. 15th Problem - 35. Search Insert Position - https://leetcode.com/problems/search-insert-position/
+	+ Vét cạn -> Duyệt từng phần tử -> Kiểm tra khóa -> Nếu bằng -> trả về vị trí tồn tại
+														Nếu khác -> kiểm tra xem khóa nhỏ hơn phần tử đầu -> 0
+																 -> kiểm tra xem khóa lớn hơn phần tử cuối -> n - 1
+																 ->	kiểm tra khóa có vừa lớn hơn phần tử đó vừa nhỏ hơn phần tử kế cận -> trả về vị trí chèn
+	+ Binary search -> Khóa bằng mid -> Insert vào phần tử low nếu k thấy khóa
+	
+16. 16th Problem - https://www.spoj.com/problems/ABCDEF/
+	+ Vét cạn -> Duyệt từng phần tử thỏa mãn -> tăng result lên 1 => O(n^6)
+	+ Chuyển biểu thức thành 2 mảng => Tìm số phần tử của mảng 1 trong mảng 2 (lưu ý 2 mảng nên sắp xếp, đếm bằng vị trí trên - vị trí dưới) => O (n^3 * logn)
+	
+17. 17th Problem - Difficulty of an array - https://codingcompetitions.withgoogle.com/kickstart/round/000000000019ffc7/00000000001d3f5b
+	+ Vét cạn D từ 1 -> phần tử cuối (do dãy tăng dần). Với mỗi D kiểm tra xem số phần tử thêm vào có thỏa mãn nhỏ hơn k không => O(n^2)
+	+ Nhận xét D đã sắp xếp giảm dần, có thể dùng binary search để tìm D trong khoảng từ 0 -> v[N-1] - v[0] (đk lặp: l < r - 1) D = r => O(nlogn)
+	
+18. 18th - Socially Distancing - Problem D, LG code jam Online Round 1 - https://codejam.lge.com/contest/problem/609/4
+	+ Tuowng tự bài 17
