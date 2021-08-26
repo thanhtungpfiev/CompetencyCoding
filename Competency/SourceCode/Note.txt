@@ -128,5 +128,78 @@ return max_so_far
 	+ Vét cạn D từ 1 -> phần tử cuối (do dãy tăng dần). Với mỗi D kiểm tra xem số phần tử thêm vào có thỏa mãn nhỏ hơn k không => O(n^2)
 	+ Nhận xét D đã sắp xếp giảm dần, có thể dùng binary search để tìm D trong khoảng từ 0 -> v[N-1] - v[0] (đk lặp: l < r - 1) D = r => O(nlogn)
 	
-18. 18th - Socially Distancing - Problem D, LG code jam Online Round 1 - https://codejam.lge.com/contest/problem/609/4
-	+ Tuowng tự bài 17
+18. 18th Problem - Socially Distancing - Problem D, LG code jam Online Round 1 - https://codejam.lge.com/contest/problem/609/4
+	+ Tương tự bài 17
+	
+19. 19th Problem - Cho số tự nhiên n ≤ 100. Hãy cho biết bao nhiêu cách phân tích số n thành tổng của các số nguyên dương, các hoán vị của nhau chỉ tính là một cách
+	Xây dựng công thức truy hồi:  F[m,v] là số cách phân tích số v thành tổng các số nguyên dương ≤ m
+	+ F[m,v] = F[m-1,v] nếu m > v
+	+ F[m,v] = F[m-1, v] + F[m, v-m] nếu m ≤ v.
+	+ F[0,0] = 1 và F[0,v] = 0 với mọi v > 0.
+	+ Cách thông thường: để tính các phần tử trong bảng F phải tuân theo thứ tự thừ trên xuống, và trên mỗi hàng thì từ trái qua phải.
+	+ Cách đệ quy: không quan tâm thứ tự tính toán. Có thể tối ưu bộ nhớ không tính toán lại nhiều lần bằng cách: Ban đầu giá trị của mảng là "chưa biết" (gán cho một giá trị đặt biệt), hàm getF(m,v) khi được gọi sẽ tra cứu đến F[m,v] nếu F[m,v] là chưa biết thì hàm getF(m,v) sẽ gọi đệ quy để tính F[m,v] rồi dùng giá trị này là kết quả của hàm. Còn nếu F[m,v] đã biết thì hàm chỉ việc dùng giá trị của F[m,v] là kết quả của hàm.
+
+20. 20thProblem - https://www.spoj.com/problems/LIS/ - Dãy con đơn điệu tăng dài nhất
+	+ Dùng kỹ thuật lính canh -> Bổ xung hai vào dãy A hai phần tử a0 = -∞ và a(n+1) = +∞. Khi đó dãy con đơn điệu tăng dài nhất chắc chắn sẽ bắt đầu từ a0 và kết thúc ở a(n+1)
+	+ Với mọi i: 0 ≤ i ≤ n+1. Ta sẽ tính L[i] là độ dài dãy con đơn điệu dài nhất bắt đầu từ vị trí thứ i đến vị trí n+1.
+	Cơ sở quy hoạch động:
+		L[n+1] = 1. Dãy con này chỉ gồm một phần tử +∞.
+	Công thức truy hồi:
+		Xét tất cả chỉ số j từ i+1 đến n+1 mà a(j) > a(i), chọn ra chỉ số jmax mà có L[jmax] là lớn nhất. Đặt L[i] = L[jmax] +1.
+	Truy vết:
+		Tại mỗi bước xây dựng L[i], mỗi ghi ta gán L[i] = L[jmax] +1, ta đặt T[i] = jmax. Để lưu lại rằng dãy con dài nhất bắt đầu tại a(i) sẽ có phần tử kế tiếp là a(jmax).
+		T[0] là phần tử đầu tiên được chọn.
+		T[T[0]] là phần tử thứ hai được chọn.
+		T[T[T[0]]] là phần tử thứ ba được chọn.
+		
+21. 21thProblem - https://www.spoj.com/problems/KNAPSACK/ - Bài toán cái túi (knapsack)
+	F[i,j] là giá trị lớn nhất có thể có bằng cachs chọn trong các gói {1, 2, ..., i} với giới hạn trọng lượng là j => giá trị lớn nhất khi được chọn trong n gói với giới hạn trọng lượng M chính là F[n,M].
+
+	Công thức truy hồi:
+		Nếu không chọn gói thứ i F[i,j] = F[i-1,j]
+		Nếu chọn gói thứ i (trong điều kiện W(i) ≤ j) F[i,j] = V[i] + F[i-1, j-W[i]].
+		F[i,j] sẽ là giá trị lớn nhất trong hai giá trị thu được ở trên.
+	Cơ sở quy hoạch động:
+		Dễ thấy F[0,j] = 0. Do không có gói nào để lựa chọn.
+	Tính bảng phương án:
+		Bảng phương án F gồm n+1 dòng, M + 1 cột, trước tiên điền cơ sở quy hoạch động
+		Dòng 0 gồm toàn số 0. Sử dụng công thức truy hồi, dùng dòng thứ 0 tính dòng thứ 1, dùng dòng thứ 1 tính dòng thứ 2,.... đến khi tính hết dòng thứ n.
+		Truy vết:
+			Tính xong bảng phương án thì ta quan tâm đến F[n,M], là giá trị lớn nhất thu được khi chọn trong n gói với giới hạn trọng lượng M.
+			Nếu F[n,M] = F[n-1,M] thì tức là ta không chọn gói thứ n, ta truy vết tiếp từ F[n-1,M].
+			Còn nếu F[n,M] ≠ F[n-1,M], thì ta thông báo rằng phương án tối ưu có chọn gói thứ n và tiếp tục truy vết tiêp từ F[n-1, M-W[n]].
+			Cứ tiếp tục cho đến khi đến hàng 0 của bảng phương án.
+
+22. 22thProblem - https://www.spoj.com/problems/EDIST/ - Biến đổi xâu
+	Đôi với xâu ký tự, việc chèn hay xóa sẽ làm cho các phần tử phía sau vị trí biến đổi bị đánh chỉ số lại, gây khó khăn cho việc quản lý vị trí. Để khắc phục điều này, ta sẽ tìm một thứ tự biến đổi thỏa mãn:
+	Phép biến đổi tại vị trí i bắt buộc phải thực hiện sau các phép biến đổi tại vị trí i+1, i+2,...
+	Công thức truy hồi:
+		Giả sử m là độ dài của xâu X, n là độ dài của xâu Y. Gọi F[i,j] là số phép biến đổi tối thiểu để biên xâu gồm i ký tự đầu của xâu X: X1X2..Xi thành j ký tự đầu tiên của xâu Y: Y1Y2...Yj.
+		Ta nhận thấy nếu X(m) = Y(n) thì ta chỉ cần biến đoạn X1X2....X(m-1) thành Y1Y2...Yn-1: Trong trường hợp này F[m,n] = F[m-1, n-1]
+		Nếu X(m) ≠ Y(n) thì tại vị trí X(m) ta có thể sử dụng một trong ba phép biến đổi:
+			1. Chèn vào sau vị trị m của X một ký tự đúng bằng Y(n): F[m,n] = 1 + F[m, n-1]
+			2. Thay vị trí m của X bằng một ký tự đúng bằng Y(n): F[m,n] = 1 + F[m -1, n-1]
+			3. Xóa vị trí thứ m của X: F[m,n] = 1 + F[m -1, n]
+			Vì F[m,n] phải là nhỏ nhất nên trong trường hợp X(m) ≠ Y(n) thì
+				F[m,n] = min(F[m, n-1],  F[m -1, n-1], F[m -1, n]) + 1
+	Cơ sở quy hoạch động:
+		F[0,j] là số phép biến đổi xâu rỗng thành xâu j ký tự. Do đó nó cần tối thiểu j phép chèn: 
+			F[0,j] = j
+
+		F[i,0] là số biến đổi xâu i ký tự ban đầu thành xâu rông. Do đó nó cần thối thiểu i phép xóa:
+			F[i,0] = i
+
+		Vậy thì đầu tiên bảng phương án F được khởi tạo hàng 0 và cột 0 là cơ sở quy hoạch động. Từ đó dùng công thức truy hồi để tính ra tất cả các phần tử bảng phương án F.
+		Sau khi tính xong F[m,n] cho ta biết số phép biến đổi tối thiểu.
+	
+	Truy vết:
+		Nếu X(m) = Y(n) thì chỉ việc xét tiếp F[m-1, n-1].
+		Nếu không, xét ba trường hợp:
+			Nếu F[m,n] = F[m,n-1] + 1 thì phép biến đổi đầu tiên được sử dụng là: Insert(m, Y(n))
+			Nếu F[m,n] = F[m-1,n-1] + 1 thì phép biến đổi đầu tiên được sử dụng là: Replace(m, Y(n))
+			Nếu F[m,n] = F[m-1,n] + 1 thì phép biến đổi đầu tiên được sử dụng là: Delete(m)
+			Đưa về bài toán m,n nhỏ hơn và truy vết tiếp cho tới khi về F[0,0].
+
+
+
+
