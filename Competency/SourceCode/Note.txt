@@ -201,5 +201,25 @@ return max_so_far
 			Đưa về bài toán m,n nhỏ hơn và truy vết tiếp cho tới khi về F[0,0].
 
 
-
-
+23. 23thProblem - Biểu diễn đồ thị
+	Ma trận kề: dùng 1 ma trận vuông V x V, với A[u,v] = 1
+	Danh sách cạnh: dùng 1 vector với cấu trúc dữ liệu là Edge (chứa thông tin 2 đỉnh u, v)
+	Danh sách kề: dùng 1 vector với số lượng tương ứng với số đỉnh V, trong từng phần tử là 1 vector chứa các đỉnh kề với đỉnh đó
+	
+24. 24thProblem - Biểu diễn cây nhị phân tìm kiếm
+	Structure Node (data, left, right)
+	Thêm phần tử vào BST
+		Nếu bạn để ý, bạn sẽ nhận ra vị trí của các Node được thêm vào sẽ luôn Node lá(không có Child nào hết). Như vậy, tại vị trí đó trước khi các Node mới tới ở thì nó là NULL. 
+		Ta có quy trình như sau:
+			Nếu Node hiện tại = NULL, đó là vị trí cần thêm. Thêm vào BST và kết thúc
+			Nếu giá trị cần thêm < giá trị root hiện tại, gọi đệ quy Insert vào cây con bên trái
+			Nếu giá trị cần thêm > giá trị root hiện tại, gọi đệ quy Insert vào cây con bên phải.
+	Xóa Node trong BST
+		Node cần xóa là Node lá(không có child nào cả)
+			Đơn giản là chỉ cần giải phóng ô nhớ đó
+		Node cần xóa có 1 child
+			Node bị xóa sẽ được giải phóng và cây con duy nhất của Node bị xóa sẽ được liên kết trực tiếp với cha của Node bị xóa.
+		Node cần xóa có đủ 2 child
+			Tìm Node của con trái nhất(giả sử nó là leftmost) của cây con bên phải của Node cần xóa.
+			Cập nhật giá trị của Node cần xóa = giá trị của Node leftmost.
+			Gọi đệ quy hàm Delete xóa Node leftmost khỏi BST.
