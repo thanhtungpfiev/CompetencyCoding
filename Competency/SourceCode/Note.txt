@@ -223,3 +223,32 @@ return max_so_far
 			Tìm Node của con trái nhất(giả sử nó là leftmost) của cây con bên phải của Node cần xóa.
 			Cập nhật giá trị của Node cần xóa = giá trị của Node leftmost.
 			Gọi đệ quy hàm Delete xóa Node leftmost khỏi BST.
+			
+25. 25thProblem - Minimum Spanding Tree by Kruskal
+		Sắp xếp tất cả các cạnh theo thứ tự tăng dần của trọng số
+		Chọn cạnh min
+		Check cạnh đó có tạo thành chu trình với cây khung đang dựng hay không?
+			K tạo chu trình => thêm cạnh vào cây khung
+			Tạo chu trình => bỏ qua
+		Kiểm tra chu trình => tìm xem gốc của 2 đỉnh có trùng nhau không (đệ quy cho parent) => trùng tạo thành 1 chu trình
+																							=> không trùng => hợp nhất (cây nhiều nút hơn trở thành gốc)
+		
+		Lặp chọn cạnh (V -1 hoặc hết cạnh)
+		main_1.cpp (node tính từ 0)
+		main.cpp (node tính từ 1)
+		
+26. 26thProblem - Minimum Spanding Tree by Prim v1
+		Khởi tạo một cây với một đỉnh duy nhất, đỉnh này được chọn tùy ý từ đồ thị V.
+		Phát triển cây bằng cách thêm một cạnh vào cây đang có. Cạnh này là cạnh có trọng số nhỏ nhất trong những cạnh nối với cây từ những đỉnh chưa thuộc cây.
+		Lặp lại bước 2 cho đến khi tất cả các đỉnh đều nằm trong cây (tức là lặp lại V-1 lần).
+		Dùng ma trận kề -> O(V^2)
+		
+27. 27thProblem - Minimum Spanding Tree by Prim v2
+		Dùng MinHeap (vector + sort) + Danh sách kề -> O(ElogV)
+		
+28. 28thProble - Djisktra - Sử dụng ma trận kề
+		Đánh dấu toàn bộ các nút là chưa thăm. Tạo ra một tập chứa toàn bộ các nút chưa thăm gọi là unvisited set.
+		Gán cho mọi nốt khoảng cách dự kiến từ S. Đặt bằng 0 cho nút S d[S] = 0 và +∞ cho tất cả các nút khác d[i] = +∞ với mọi i ≠ S. Đặt nút hiện tại u là S.
+		So sánh khoảng cách dự kiến hiện tại của các đỉnh v lân cận với u và khoảng cách nếu đi từ S → u → v. Nếu đi qua u gần hơn, cập nhật lại khoảng cách dự kiến của v là d[v].
+		Loại bỏ nút u ra khỏi unvisited set.
+		Lấy nút u nằm ở trong unvisited set mà có d[u] là nhỏ nhất
