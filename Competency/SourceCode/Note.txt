@@ -249,6 +249,7 @@ return max_so_far
 		Dùng MinHeap (vector + sort) + Danh sách kề -> O(ElogV)
 		main_1.cpp (node tính từ 0)
 		main.cpp (node tính từ 1)
+		main_2.cpp (min heap bằng priority queue)
 		
 28. 28thProblem - Djisktra - Sử dụng ma trận kề
 		Đánh dấu toàn bộ các nút là chưa thăm. Tạo ra một tập chứa toàn bộ các nút chưa thăm gọi là unvisited set.
@@ -256,3 +257,24 @@ return max_so_far
 		So sánh khoảng cách dự kiến hiện tại của các đỉnh v lân cận với u và khoảng cách nếu đi từ S → u → v. Nếu đi qua u gần hơn, cập nhật lại khoảng cách dự kiến của v là d[v].
 		Loại bỏ nút u ra khỏi unvisited set.
 		Lấy nút u nằm ở trong unvisited set mà có d[u] là nhỏ nhất
+		
+29. 29thProblem - Heap
+		Operations on Min Heap:
+			1) getMini(): It returns the root element of Min Heap. Time Complexity of this operation is O(1).
+			2) extractMin(): Removes the minimum element from MinHeap. Time Complexity of this Operation is O(Logn) as this operation needs to maintain the heap property (by calling heapify()) after removing root.
+			3) decreaseKey(): Decreases value of key. The time complexity of this operation is O(Logn). If the decreases key value of a node is greater than the parent of the node, then we don’t need to do anything. Otherwise, we need to traverse up to fix the violated heap property.
+			4) insert(): Inserting a new key takes O(Logn) time. We add a new key at the end of the tree. IF new key is greater than its parent, then we don’t need to do anything. Otherwise, we need to traverse up to fix the violated heap property.
+			5) delete(): Deleting a key also takes O(Logn) time. We replace the key to be deleted with minum infinite by calling decreaseKey(). After decreaseKey(), the minus infinite value must reach root, so we call extractMin() to remove the key.
+
+30. 30thProblem - Djisktra - Sử dụng danh sách kề với MinHeap
+			1 list kiểu pair <weight, v>. Từng phần tử trong list là các đỉnh kề với đỉnh u.
+			Khở tạo heap với source, weight 0, mảng d lưu khoảng cách các phần tử đến source, d[source] = 0.
+			Duyệt từng đỉnh kề với u -> cập nhật đường đi đến đỉnh qua u.
+			
+31. 31thProblem - BFS
+	Giả sử ta có một danh sách những đỉnh đang chờ "thăm". Tại mỗi bước, ta thăm một đỉnh đầu danh sách và cho những đỉnh chưa nằm trong danh sách kề với nó xếp hàng thêm vào cuối danh sách. Chính vì nguyên tắc đó nên danh sách chứa những đỉnh đang chờ sẽ được tổ chức dưới dạng hàng đợi (queue).
+	Loang màu: Dùng ma trận hàng cột (trên, phải ,dưới trái). Nhét điểm đang xét vào hàng đợi, lấy ra, tô màu. Xét các điểm xung quanh, nếu có màu cần tô thì nhét vào hàng đợi.
+
+32. 32Proble - DFS
+	Từng bước ta xác định bước đi kế tiếp theo là đỉnh kề với đỉnh hiện tại mà chưa được thăm. Sử dụng ngăn xếp
+	Loang màu: Dùng ma trận hàng cột (trên, phải ,dưới trái). Nhét điểm đang xét vào ngăn xếp, lấy ra, tô màu. Xét các điểm xung quanh, nếu có màu cần tô thì nhét vào ngăn xếp.

@@ -28,7 +28,7 @@ struct AdjNode
 
 void addEdgeAdjacencyList(vector<vector<AdjNode>>& graph, int scr, int dest, int weight)
 {
-    graph[scr].push_back(AdjNode(dest, weight));
+    graph[src].push_back(AdjNode(dest, weight));
     graph[dest].push_back(AdjNode(scr, weight));
 }
 
@@ -112,9 +112,9 @@ int main()
     int E = 14;
     vector<vector<AdjNode>> graph(V);
     std::ifstream fileInput("D:/QT/CompetencyCoding/Competency/SourceCode/27thProblem/input.txt");
-    int scr, dest, weight;
-    while (fileInput >> scr >> dest >> weight) {
-        addEdgeAdjacencyList(graph, scr, dest, weight);
+    int src, dest, weight;
+    while (fileInput >> src >> dest >> weight) {
+        addEdgeAdjacencyList(graph, src, dest, weight);
     }
 
     primMST(graph);

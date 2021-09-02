@@ -27,10 +27,10 @@ struct AdjNode
     }
 };
 
-void addEdgeAdjacencyList(vector<vector<AdjNode>>& graph, int scr, int dest, int weight)
+void addEdgeAdjacencyList(vector<vector<AdjNode>>& graph, int src, int dest, int weight)
 {
-    graph[scr].push_back(AdjNode(dest, weight));
-    graph[dest].push_back(AdjNode(scr, weight));
+    graph[src].push_back(AdjNode(dest, weight));
+    graph[dest].push_back(AdjNode(src, weight));
 }
 
 void printAdjacencyList(const vector<vector<AdjNode>>& graph)
@@ -120,9 +120,9 @@ int main()
 //        addEdgeAdjacencyList(graph, scr - 1, dest - 1, weight);
 //    }
     std::ifstream fileInput("D:/QT/CompetencyCoding/Competency/SourceCode/27thProblem/input - Copy.txt");
-    int scr, dest, weight;
-    while (fileInput >> scr >> dest >> weight) {
-        addEdgeAdjacencyList(graph, scr - 1, dest - 1, weight);
+    int src, dest, weight;
+    while (fileInput >> src >> dest >> weight) {
+        addEdgeAdjacencyList(graph, src - 1, dest - 1, weight);
     }
 
 //    printAdjacencyList(graph);
