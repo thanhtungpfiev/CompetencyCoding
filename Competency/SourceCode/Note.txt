@@ -275,6 +275,27 @@ return max_so_far
 	Giả sử ta có một danh sách những đỉnh đang chờ "thăm". Tại mỗi bước, ta thăm một đỉnh đầu danh sách và cho những đỉnh chưa nằm trong danh sách kề với nó xếp hàng thêm vào cuối danh sách. Chính vì nguyên tắc đó nên danh sách chứa những đỉnh đang chờ sẽ được tổ chức dưới dạng hàng đợi (queue).
 	Loang màu: Dùng ma trận hàng cột (trên, phải ,dưới trái). Nhét điểm đang xét vào hàng đợi, lấy ra, tô màu. Xét các điểm xung quanh, nếu có màu cần tô thì nhét vào hàng đợi.
 
-32. 32Proble - DFS
+32. 32thProblem - DFS
 	Từng bước ta xác định bước đi kế tiếp theo là đỉnh kề với đỉnh hiện tại mà chưa được thăm. Sử dụng ngăn xếp
 	Loang màu: Dùng ma trận hàng cột (trên, phải ,dưới trái). Nhét điểm đang xét vào ngăn xếp, lấy ra, tô màu. Xét các điểm xung quanh, nếu có màu cần tô thì nhét vào ngăn xếp.
+
+33. 33thProblem - Code Understanding Data - https://codepro.lge.com/exam/19/overseas-questions-for-previous-test/quiz/1
+	Bước 1: chạy code bằng tay - vẽ ra bảng kết quả - tìm ra quy luật của cặp value - from tương ứng với giá trị - chỉ số của mảng cũ => sol[from[i]] = A[i]
+	Bước 2: xây dựng được công thức:
+		from[0] = 0
+		from[i + 1] = (from[i] + value[i]) % N;
+		Nếu from[i + 1] từng tồn tại trong mảng from từ 0 đến i => next lên 1 cho đến khi gặp 1 giá trị mới 
+
+34. 34thProblem - [Code understanding] Designing a communication buffer - http://collab.lge.com/main/display/~tung2.nguyen/2.7.2+%5BCode+understanding%5D+Designing+a+communication+buffer
+	Xác định có thể xóa code cũ đi và thêm mới code của mình không? Nếu được thì dùng phương án này để tiết kiệm thời gian
+	Với priority queue, kiểu dữ liệu định nghĩa, thì sử dụng thêm 1 struct và nạp chồng phương thức operator ()
+	
+35. 35thProblem - Picutre recognition - https://codepro.lge.com/exam/19/overseas-questions-for-previous-test/quiz/3
+	Bước 1 - Đọc kỹ đề bài 
+	Bước 2 - Chú ý câu các vùng đã tô vẫn có thể xác định được -> đánh dấu tọa độ min, max của từng mầu -> Màu có tọa độ min, max k thuộc bảng -> k dùng
+	Bước 3 - Những màu đã tô đè lên 1 màu khác -> Bỏ qua màu đó
+
+36. 36thProblem - Unmanned train - https://codepro.lge.com/exam/19/overseas-questions-for-previous-test/quiz/4
+	Bước 1 - Đọc kỹ đề bài
+	Bước 2 - Xác định vùng chứa số 1 -> Dùng BFS hoặc DFS (tư tưởng là từ 1 điểm bắt đầu, loang ra các điểm xung quanh, điểm bắt đầu và điểm loang thỏa mãn điều kiện sẽ được update new value)
+	Bước 3 - Tìm điểm ngắn nhất giữa 2 vùng
