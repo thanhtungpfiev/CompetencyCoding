@@ -294,8 +294,107 @@ return max_so_far
 	Bước 1 - Đọc kỹ đề bài 
 	Bước 2 - Chú ý câu các vùng đã tô vẫn có thể xác định được -> đánh dấu tọa độ min, max của từng mầu -> Màu có tọa độ min, max k thuộc bảng -> k dùng
 	Bước 3 - Những màu đã tô đè lên 1 màu khác -> Bỏ qua màu đó
+	Bài này kiểm tra việc thành thục ở việc đánh dấu và tìm kiếm trên mảng. Thuật toán đơn thuần là duyệt (vét cạn) và đánh dấu.
 
 36. 36thProblem - Unmanned train - https://codepro.lge.com/exam/19/overseas-questions-for-previous-test/quiz/4
 	Bước 1 - Đọc kỹ đề bài
 	Bước 2 - Xác định vùng chứa số 1 -> Dùng BFS hoặc DFS (tư tưởng là từ 1 điểm bắt đầu, loang ra các điểm xung quanh, điểm bắt đầu và điểm loang thỏa mãn điều kiện sẽ được update new value)
 	Bước 3 - Tìm điểm ngắn nhất giữa 2 vùng
+	Một trong những ứng dụng của duyệt theo chiều rộng là tìm đường đi ngắn nhất ở đồ thị không có trọng số. 
+	Bài toán này đang kiểm tra mức độ thành thục của thuật toán loang (flood fill). Và kiểm tra việc sử dụng BFS để tìm kiếm đường đi ngắn nhất trên đồ thị không có trọng số hoặc các xử lý các tham số trong ma trận.
+	
+37. 37thProblem - Road construction - https://codepro.lge.com/exam/19/overseas-questions-for-previous-test/quiz/5
+	Bước 1 - Đọc kỹ đề bài
+	Bước 2 - Bài toán đồ thị tim đường đi ngắn nhất với trọng số không âm => Dijisktra + priority queue
+	Bước 3 - Tư tưởng: sử dụng cấu trúc dữ liệu Point với tọa độ x, y và trọng số weight (khoảng các từ x, y đến gốc 0, 0). 
+		Ban đầu tất cả các nút đều có weight là INT_MAX, trừ nút 0 có weight là 0. 
+		Đẩy nút 0 vào queue (dùng 1 constructor với bool operator()(const Point& a, const Point &b) {return a.weight > b.weight);
+		Lấy nút đầu tiên ra khỏi queue (nút có khoảng cách đến 0 là min)
+		Tìm tất cả các lân cận của nút đó (4 đỉnh xung quanh), update lại khoảng cách từ các điểm lân cận đến nút 0 bằng công thức d[v] > d[u] + value(v) thì d[v] = d[u] + value(v). Đẩy nút có d[v] được cập nhật vào queue.
+	Bước 4 - In kết quả d[N-1][N-1]
+	
+	Có hai giải thuật giải quyết bài toán tìm đường với chi phí ngắn nhất là  BFS với đồ thị không có trọng số và Dijkstra với đồ thị có trọng số không âm.
+	Bài này đang kiểm tra mức độ thành thục về thuật toán tìm đường ngắn nhất (Dijkstra) và tham lam do đó tham số chỉ vừa đủ để vượt quá vét cạn và nhỏ hơn rất nhiều với phương pháp tối ưu (n=100 so với 10,000).
+
+	Bài này cũng có 30% test case cho việc sử dụng vét cạn, với chỉ số là 30 điểm → ban có thể lấy 9 điểm nếu không biết cài đặt tham lam và Dijkstra.
+
+38. 38thProblem - Mario Game - https://codepro.lge.com/exam/19/overseas-questions-for-previous-test/quiz/6
+	Bước 1 - Đọc kỹ đề bài
+	Bước 2 - Nhận thấy bài toán liên quan đến việc chọn hay không chọn -> vét cạn 2^N bằng backtrack
+	Bước 3 - Tối ưu, quan sát kỹ đề bài, thấy trường hợp người ta ví dụ cho dãy tốt nhất, nhận xét là nhảy vào phần tử đầu và cuối của các dãy giảm dần là ok => Tham lam
+	Giải bằng phương pháp vét cạn
+		Nhận thấy rằng, một candidate là một tập hợp con của tập N phần tử. Do đó, ta sẽ sinh ra các tập con và đi kiểm tra kết quả của tập này.
+		Với mỗi phần tử, ta có thể chọn hoặc không chọn phần tử đó vào danh sách tập con. Nên số trường hợp thử nghiệm là 2^N.
+	Giải bằng phương pháp tham lam
+		Muốn kết quả được tối ưu, tại bước lẻ ta cần nhảy tới vị trí lớn nhất có thể, tại bước chẵn ta nhảy tới vị trị nhỏ nhất có thể.
+		Trong một chuỗi giảm dần, thì nhẩy bước lẻ vào số đầu tiên (là số lớn nhất trong chuỗi) và bước chẵn vào số cuối cùng (là số nhỏ nhất trong chuỗi) thì kết quả luôn là tối ưu nhất trong mọi cách nhảy.
+		Đối với dãy tăng dần thì bỏ qua dãy này để đạt kết quả tối ưu
+		Do mọi P[i] ≥ 1, và i bắt đầu từ 0 đến N-1 (0 ≤ i ≤ N-1) do đó nếu ta đặt phần tử lính canh P[N] = 0 → Dãy P luôn luôn có ít nhất một dãy giảm dần.
+		Do đó, giải thuật của ta là đi tìm dãy số giảm dần. Chiều cao lớn nhất đạt được là tổng chênh lệch của các số đầu tiên (lớn nhất) và cuối cùng (nhỏ nhất) của các dãy giảm dần.
+		Bài toán này kiểm tra mức độ tư duy toán học và việc sử dụng và cài đặt kỹ thuật tham lam (N tối đa là 10^9 nhưng bài chỉ cho 10^5).
+
+	Với cách vét cạn, ta vẫn có thể qua được các test case nhỏ (3/10 test case) → Vậy ta có thể sử dụng giả thuật tham lam cho bản thân trong khi đi thi bằng cách sử dụng vét cạn để tối ưu hóa số điểm đạt được trong trường hợp chưa nghĩ ra cách giải quyết tối ưu.
+	
+39. 38thProblem - Walk - https://codepro.lge.com/exam/19/overseas-questions-for-previous-test/quiz/7
+	Bước 1 - Đọc kỹ đề bài
+	Nhận xét 1: Do mảng P đã được sắp xếp tăng dần, nên nhân viên thứ i có vị trí thực tế là:
+
+		Vị trí tính toán (P[i] + S[i] * T) nếu vị trí tính toán không vượt quá vị trí thực tế của nhân viên i + 1.
+		Vị trí thực tế của nhân viên i + 1 nếu vị trí tính toán vượt quá vị trí thực tế của nhân viên i + 1.
+		→ Để tính toán vị trị thực tế của nhân viên thứ i, ta cần biết vị trí thức tế của nhân viên thứ i + 1. 
+
+	Nhận xét 2: Nhân viên cuối cùng (n-1) sẽ không bị ai chặn, nên vị trí thực tế cũng là vị trí tính toán.
+	Vậy để cách thức giải quyết của chúng ta là tính vị trí thực tế của nhân viên thứ (n-1) đầu tiên. Sau đó tính toán vị trí thực tế của các nhân viên n-2 đến 0.
+	
+	Để ý rằng, dữ liệu cho là số lớn 10^9, cũng đúng là giá trị tối đa của int (32 bit). Do đó việc tính toán S[i] * T[i] sẽ vượt quá int.
+
+	Do đó phải đổi kiểu dữ liệu phù hợp hơn 64 bit → long long.
+	
+	Bài toán này đang kiểm tra mức độ thành thạo về việc quản lý giới hạn dữ liệu. Một trong những lỗi có thể xảy ra trong lúc lập trình.
+
+40. 40thProblem - Roof garden of the building - https://codepro.lge.com/exam/19/overseas-questions-for-previous-test/quiz/8
+	Bước 1 - Đọc kỹ đề bài
+	Bước 2 - Sử dụng phương pháp vét cạn
+		Nhận xét 1: Ta thêm một lính canh vào vị trí thứ n với giá trị lớn hơn tất cả các tòa nhà đang có để đảm bảo tòa nhà cuối cùng luôn là lớn nhất → Việc duyệt dễ dàng hơn.
+
+		Để kiểm tra số tòa nhà nhìn thấy được từ tòa nhà thứ i, ta kiểm tra từ tòa nhà thứ i + 1 đến tòa nhà thứ n. Nếu có tòa nhà nào lớn hơn chiều cao H[i] của tòa nhà thứ i thì ta dừng → tính toán ra số tòa nhà nhìn thấy được từ tòa nhà thứ i.
+
+		Tiếp tục lặp lại việc trên từ tòa nhà đầu tiên (thứ 0) đến tòa nhà cuối cùng (thứ n-1) ta có tổng số mái nhà nhìn thấy được.
+	Bước 3 - Tối ưu vét cạn, sử dụng tham lam
+		Nhận xét 2: Ta thấy rằng ở vị trí thứ j, ta sẽ tính toán được các mái nhà nhìn thấy được của các tòa nhà bên trái nó mà có chiều cao thấp hơn nó.
+		Nhận xét 3: Chiều cao của các tòa nhà dựa vào tòa nhà thứ j để tính toán có thứ tự giảm dần.
+		Do đó, để giải quyết bài toán này, ta cần một cách lưu trữ nào đó để:
+			Đến tòa nhà thứ i, tính toán tất cả các tòa nhà có độ cao nhỏ hơn H[i] ở phía bên trái.
+			Chiều cao của các tòa nhà lưu trữ phải giảm dần
+		2 cách duyệt:
+			
+			1. Duyệt từ đầu dãy đến N (phần tử lính canh có giá trị vô cùng). Đưa phần tử 0 vào dãy. Nếu phần tử i lớn hơn đỉnh stack -> dãy k thỏa mãn tính giảm dần, lấy từng phần tử phía trc trong stack ra và update kết quả. Đẩy phần tử thứ i vào dãy
+			
+			2. Duyệ từ cuối dãy, tìm các phần tử mà nhỏ hơn phần tử i đang xét, bỏ ra ngoài, lưu index của phần tử lớn hơn gần nhất với phần tử đang xét. Nếu không tìm thấy thì đánh dấu là -1. 
+			Duyệt dãy đánh dấu, phần tử  có index = -1 thì update kết quả bằng phần tử lính canh N (các phần tử ở phía đuôi k có phần tử nào lớn hơn nó)
+			
+41. 41thProblem - Researcher health promotion project - https://codepro.lge.com/exam/19/overseas-questions-for-previous-test/quiz/9
+		Bước 1 - Đọc kỹ đề bài
+		Bước 2 - Sử dụng phương pháp vét cạn -> O(2^N)
+			if (step == N) {  // Nếu cấu hình đã được tao ra xong
+			if (step > 1 && selected[step-1] && selected[step-2]) { // Nếu hai bước đằng trước đó đã nằm trong cấu hình rồi -> Không chọn bước này
+			if (step > 0 && !selected[step-1]) { // Nếu bước đằng trước chưa được chọn -> Thì tại bước này phải bước vào, nếu không chọn tiếp bậc này thì bạn bỏ qua hai bậc thang -> vi phạm điều lệ của đề bài
+			còn lại -> // Bạn có hai lựa chọn là bước vào hoặc không bước vào bước này
+		Bước 3 - Tối ưu sử dụng quy hoạch đôngnj
+			Nhận xét 1: Với điều kiện không được bước quá hai bước. Do đó tại bước thứ i, nếu ta chọn bước thứ i thì số trường hợp có thể hình thành là
+				Bước từ vị trí thứ i-1
+				Bước từ vị trí i-2.
+					Như vậy nếu gọi d[i] là kết quả tốt nhất tại bước thứ i, ta có: 
+						d[i] = P[i] + d[i-1];
+						d[i] = P[i] + d[i-2];
+			Nhận xét 2:Tuy nhiên, với điều kiện không được bước ba bước liên tiếp. Nếu d[i-1] bao gồm bước vào vị trí i-2 → Vi phạm điều kiện đầu bài.
+				Do đó, để chắc chắn ta vị trí i-2 không bước vào ta bước vào vị trí i-3 bỏ qua i-2 và bước tới vị trị i-1.
+					Tức là d[i] = P[i] + P[i -1] + d[i-3] thay vì d[i] = P[i] + d[i-1]
+			Nhận xét 3: 
+				Với N = 1, thì kết quả là P[0]; (do P[i] không âm)
+				Với N = 2, thì kết quả tốt nhất là P[0] + P[1], bước vào cả hai bậc thang
+				Với N = 3, thì kết quả là kết quả tốt nhất của P[0] + P[2] hoặc P[1] + P[2]
+			 Do đó, ta có :
+				Công thức truy hồi d[i] = P[i] + max(P[i -1] + d[i-3], d[i-2])
+				Cơ sở quy hoạch động d[0] = P[0], d[1] = P[0] + P[1], d2 = P[2] + max(P[0], P[1])
+				Bảng phương án d là mảng một chiều

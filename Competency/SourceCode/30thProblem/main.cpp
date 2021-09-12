@@ -57,7 +57,7 @@ void Graph::shortestPath(int s)
             int v = adjNodes[i].second;
             int weight = adjNodes[i].first;
             if (d[v] > d[u] + weight) {
-                d[v]= d[u] + weight;
+                d[v] = d[u] + weight;
                 pq.push(make_pair(d[v], v));
             }
         }
