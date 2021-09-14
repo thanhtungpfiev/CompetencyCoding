@@ -380,7 +380,7 @@ return max_so_far
 			if (step > 1 && selected[step-1] && selected[step-2]) { // Nếu hai bước đằng trước đó đã nằm trong cấu hình rồi -> Không chọn bước này
 			if (step > 0 && !selected[step-1]) { // Nếu bước đằng trước chưa được chọn -> Thì tại bước này phải bước vào, nếu không chọn tiếp bậc này thì bạn bỏ qua hai bậc thang -> vi phạm điều lệ của đề bài
 			còn lại -> // Bạn có hai lựa chọn là bước vào hoặc không bước vào bước này
-		Bước 3 - Tối ưu sử dụng quy hoạch đôngnj
+		Bước 3 - Tối ưu sử dụng quy hoạch động - O(N)
 			Nhận xét 1: Với điều kiện không được bước quá hai bước. Do đó tại bước thứ i, nếu ta chọn bước thứ i thì số trường hợp có thể hình thành là
 				Bước từ vị trí thứ i-1
 				Bước từ vị trí i-2.
@@ -398,3 +398,37 @@ return max_so_far
 				Công thức truy hồi d[i] = P[i] + max(P[i -1] + d[i-3], d[i-2])
 				Cơ sở quy hoạch động d[0] = P[0], d[1] = P[0] + P[1], d2 = P[2] + max(P[0], P[1])
 				Bảng phương án d là mảng một chiều
+42. 42thProblem - Calculator - https://codepro.lge.com/exam/19/overseas-questions-for-previous-test/quiz/10
+		Bước 1 - Đọc kỹ đề bài
+		Nhận xét 1: Nếu tính vị trí của các chữ số trong số A và B bắt đầu từ 0 khi nhân số thứ i của số A với số thứ j của số B thì vị trí của kết quả A[i]*B[j] là i + j
+		Nhận xét 2: Nếu A có i chữ số (tính từ 0) và B có j chữ số (tính từ 0) thì A*B có tối đa i+j+1 chữ số (tính từ 0). (+1 do bù của số lớn nhất nếu có). => vector<int> ban đầu là N + M - 1. Sau đó thêm phần tử bù cuối cùng sau.
+		Nhận xét 3: Đối với cơ số khác 10, ta chuyển đổi sang cơ số 10 rồi áp dụng phép nhân như với cơ số 10.
+		Nhận xét 4: Hai số S,D có độ dài tối đa là 100 (số tối đa là 36^100), quá cách lưu trữ của số nguyên là 2^64 nên ta không thể chuyển về số nguyên để tính toán xong chuyển ngược lại.
+		Nhận xét 5: Nếu một trong hai số là âm, ta chỉ cần tính tích hai số dương, sau đó đảo dấu.
+		-> Thông thạo cách tính toán học:
+			+ Chuyển chữ thành số (int(c) - '0', int(c) - 'A' + 10)
+			+ Chuyển số thành chữ (char (n + '0'), char(n - 10 + 'A')
+			+ Nếu phần tử lớn hơn Base
+				Lấy thương là số bù cho phần tử tiếp theo (tính từ đuôi)
+				Lấy dư là kết quả của phần tử hiện tại (tính từ đuôi)
+			+ Kiểm tra phần tử đầu (0) có bù hay không
+
+43. 43thProblem - Psychology experiment - https://codepro.lge.com/exam/19/overseas-questions-for-previous-test/quiz/11
+		Bước 1 - Đọc kỹ đề bài, chú ý dãy tăng dần
+		Bước 2 - Vét cạn - Dùng 2 vòng for check từng cấu hình (O(N^2)
+		Bước 3 - Dùng tham lam O(N)
+			Nhận xét 1: Do dãy A là dãy tăng dần, đo đó tổng A[i] + A[j] >  A[i] + A[k] với i < k < j. Tức với mọi k nằm trong khoảng từ i đến j ta luôn có tổng A[i] + A[j] lớn hơn tổng A[i] + A[k] ( do A[j] > A[k])
+			Nhận xét 2: Do dãy A là dãy tăng dần, đo đó tổng A[i] + A[j] <  A[k] + A[j] với i < k < j. Tức với mọi k nằm trong khoảng từ i đến j ta luôn có tổng A[i] + A[j] nhỏ hơn tổng A[k] + A[j]. (do A[i] < A[k])
+			Nhận xét 3: Dựa vào nhận xét 1 và 2:
+				Nếu A[i] + A[j] < 0 thì A[i] + A[j -1] sẽ âm hơn A[i] + A[j] (tiến ra xa 0 hơn)
+				Nếu A[i] + A[j] > 0 thì A[i +1] + A[j] sẽ dương hơn A[i] + A[j] (tiến ra xa 0 hơn)
+			Do ta đang cần tìm tổng hai số gần không hơn, nên ta sẽ không tìm cách đi ra xa số 0. Do vậy nếu A[i] + A[j] < 0, ta tiến hành xét cặp A[i+1] + A[j], ngược lại A[i] + A[j] > 0, ta tiến hành xét cặp A[i] + A[j-1]
+
+			Như vậy thuật toán tham lam của ta sẽ là:
+				Sẽ có chỉ số i đi từ trái sang (từ 0 đến N-1), và chỉ số j đi từ phải về (từ N-1 về 0).
+				Nếu tổng A[i] + A[j] < 0 → Ta xét cặp A[i+1] và A[j].
+				Nếu tổng A[i] + A[j] > 0 → Ta xét cặp A[i] và A[j-1].
+				Nếu tổng A[i] + A[j] = 0 → Ta dừng và in ra kết quả.
+				Nếu i >= j → dừng lại (vì tất cả các cặp tốt nhất đã được xét).
+
+
