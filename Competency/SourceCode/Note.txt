@@ -431,4 +431,21 @@ return max_so_far
 				Nếu tổng A[i] + A[j] = 0 → Ta dừng và in ra kết quả.
 				Nếu i >= j → dừng lại (vì tất cả các cặp tốt nhất đã được xét).
 
+44. 44thProblem - Helping the needy - https://codepro.lge.com/exam/19/overseas-questions-for-previous-test/quiz/12
+		Bước 1 - Đọc kỹ đề bài, chú ý N luôn bằng 0 khi gửi được đủ hàng
+		Bước 2 - Vét cạn - Thử từng giá trị của từng loại và tim phương án có tổng số hộp là lớn nhất. Dừng vét cạn khi value > N hoặc step = 10 => O(N^10)
+		Bước 3 - Cải thiện vét cạn - Ta có nhận xét rằng nếu ta tại mỗi cấu hình ta chọn số lượng hộp từ cao đến thấp. Thì tại vị trí kết quả đúng là N thì cũng là kết quả tốt nhất.
+		Bước 4 - Sử dụng tham lam 
+			Nhận xét 1: Muốn số hộp là nhiều nhất thì sử dụng các hộp nhỏ để đựng trước → Ta xét việc đóng gói các hộp từ loại hộp nhỏ trước.
+			Nhận xét 2: Do dữ liệu đảm bảo luôn có cách đóng N hàng hóa → Khi số lượng hàng hóa không đủ cho đóng một loại hộp nào đó → Ta bù số lượng hàng hóa từ các hộp đằng trước đã đóng gói xong.
+				Với mỗi loại hộp i ta thử đóng gói C[i] lần → độ phức tạp O(C[i] * số loại hộp) = O(20*10) = O(200) 
+				Với mỗi loại hộp i ta có thể tìm bù từ các hộp phía trước → Độ phức tạp O(C[i] * số loại hộp) = O(20*10) = O(200) 
 
+45. 45thProblem - Factory operation - https://codepro.lge.com/exam/19/overseas-questions-for-previous-test/quiz/13
+		Bước 1 - Đọc kỹ đề bài, chú ý kiểu dữ liệu có thể là số lớn
+		Bước 2 - Vét cạn - Xem ngày hôm đó nên mua hay mua từ 1 ngày nào trước đó và chi phí lưu kho trong những ngày đó + chi phí mua vẫn nhỏ hơn chi phí mua hiện tại -> O(N ^ 2)
+		Bước 3 - Tham lam - Nếu biết giá của ngày hôm trước tốt nhất là giá nào, thì giá của ngày hôm nay tốt nhất là min của (giá ngày hôm nay, giá ngày hôm trước + chi phí lưu kho)
+		
+46. 46thProblem - Service Center Task Simulation - https://codepro.lge.com/exam/19/overseas-questions-for-previous-test/quiz/14
+		Bước 1 - Đọc kỹ đề bài, chú ý khách hàng nào đến trước thì phục vụ trước. Nếu kỹ sư nào bận thì để kỹ sư khác phục vụ. Nếu tất cả các kỹ sư đều bận thì khách hàng tiếp theo phải đợi cho đến khi kỹ sư khác rảnh. 
+		Bước 2 - Vét cạn - Tính khoảng thời gian phục vụ của từng kỹ sư. Tìm kỹ sư có thời gian phục vụ lớn nhất. -> O(Q*N*T)
