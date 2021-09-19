@@ -449,3 +449,23 @@ return max_so_far
 46. 46thProblem - Service Center Task Simulation - https://codepro.lge.com/exam/19/overseas-questions-for-previous-test/quiz/14
 		Bước 1 - Đọc kỹ đề bài, chú ý khách hàng nào đến trước thì phục vụ trước. Nếu kỹ sư nào bận thì để kỹ sư khác phục vụ. Nếu tất cả các kỹ sư đều bận thì khách hàng tiếp theo phải đợi cho đến khi kỹ sư khác rảnh. 
 		Bước 2 - Vét cạn - Tính khoảng thời gian phục vụ của từng kỹ sư. Tìm kỹ sư có thời gian phục vụ lớn nhất. -> O(Q*N*T)
+
+47. 47thProblem - Development of Self-driving Algorithm - https://codepro.lge.com/exam/19/overseas-questions-for-previous-test/quiz/15
+		Bước 1 - Đọc kỹ đề bài, nhận thấy đây là bài tìm đường đi ngắn nhất
+		Bước 2 - Vét cạn - Tại mỗi bước, ta sẽ thử các đường đi bên cạnh mà chưa đi đến. Nếu đến đích ta  ghi nhận kết quả và giữ lại kết quả tốt nhất
+		-> ại mỗi bước ta có 4 lựa chọn, ta có tối đa H*W bước là 500*500 = 250,000 bước → độ phức tạp tính toán O(4^250,000) → Không khả thi
+		Bước 3 - Dùng BFS hoặc Dijisktra -> priority_queue
+		
+48. 48thProblem - To Assign Project to a New Developer - https://codepro.lge.com/exam/19/overseas-questions-for-previous-test/quiz/16
+		Bước 1 - Đọc kỹ đề bài, nhận thấy có thể sắp xếp được dãy
+		Bước 2 - Vét cạn - Với mỗi một dự án, Gram Park có hai lựa chọn là tham gia hoặc không tham gia. Sau đó ta kiểm tra cấu hình có hợp lệ hay không (không có sự overlap thì là hợp lệ) và tính số dự án của cấu hình đó và ghi nhận kết quả tốt nhất. -> O(2^N)
+		Bước 3 - Sử dụng tham lam O(NlogN)
+			Nhận xét 1:Nếu project A bao project B thì chọn project B hợp lý hơn:
+			Nhận xét 2: Nếu project A đè lên project B nhưng kết thúc sớm hơn, thì việc chọn project A sẽ tạo tốt hơn do có thêm thời gian cho các project đằng sau:
+			Nhận xét 3: Từ nhận xét 1+2, ta thấy rằng dự án nào có thời gian kết thúc sớm hơn là lựa chọn tốt hơn (có thêm thời gian cho các project đằng sau)
+			Do đó, việc áp dụng tham làm bằng cách sắp xếp các project theo thứ tự tăng dần thời gian kết thúc. Duyệt từ đầu danh sách đã được sắp xếp, nếu project nào có thể assign thì assign cho Gram Park.
+
+
+	
+
+
