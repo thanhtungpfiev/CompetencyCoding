@@ -452,7 +452,7 @@ return max_so_far
 
 47. 47thProblem - Development of Self-driving Algorithm - https://codepro.lge.com/exam/19/overseas-questions-for-previous-test/quiz/15
 		Bước 1 - Đọc kỹ đề bài, nhận thấy đây là bài tìm đường đi ngắn nhất
-		Bước 2 - Vét cạn - Tại mỗi bước, ta sẽ thử các đường đi bên cạnh mà chưa đi đến. Nếu đến đích ta  ghi nhận kết quả và giữ lại kết quả tốt nhất
+		Bước 2 - Vét cạn - Tại mỗi bước, ta sẽ thử các đường đi bên cạnhs mà chưa đi đến. Nếu đến đích ta  ghi nhận kết quả và giữ lại kết quả tốt nhất
 		-> ại mỗi bước ta có 4 lựa chọn, ta có tối đa H*W bước là 500*500 = 250,000 bước → độ phức tạp tính toán O(4^250,000) → Không khả thi
 		Bước 3 - Dùng BFS hoặc Dijisktra -> priority_queue
 		
@@ -466,6 +466,32 @@ return max_so_far
 			Do đó, việc áp dụng tham làm bằng cách sắp xếp các project theo thứ tự tăng dần thời gian kết thúc. Duyệt từ đầu danh sách đã được sắp xếp, nếu project nào có thể assign thì assign cho Gram Park.
 
 
-	
+49. 49thProblem - Path Sum II (medium) - https://leetcode.com/problems/path-sum-ii/
+		Tạo 1 cấu trúc dữ liệu là DFSNode chứa giá trị là node hiện tại, tổng đến node hiện tại, đường dẫn đến node hiện tại
+		Dùng stack để dùng DFS. Thêm root vào stack
+		Lấy phần tử trên cùng của stack
+			Kiểm tra node đó là lá hay không? Kiểm tra giá trị của DFSNode lá đó thỏa mãn hay không?
+			Nếu không phải là lá -> Kiểm tra node trái và phải -> Update DFSNode của node đó và thêm vào stack
+		Lặp đến khi stack rỗng
 
-
+50. 50thProblem - Number of Provinces (medium) - https://leetcode.com/problems/number-of-provinces/
+		Đổi ma trận kề thành danh sách kề
+		Tạo 1 mảng chứa từng đỉnh đã thăm hay chưa
+		Nếu đỉnh chưa thăm -> đánh dấu đã thăm -> Tìm các đỉnh còn lại kề với đỉnh đang xét và chưa thăm -> DFS đệ quy
+		
+51. 51thProblem - Maximum Depth of Binary Tree (easy) - https://leetcode.com/problems/maximum-depth-of-binary-tree/
+		Tương tự bài 49. DFSNode bao gồm node hiện tại và độ sâu đến node đó (số node từ gốc đến node đó). Kiểm tra max của từng node lá
+		
+52. 52thProblem - Count Good Nodes in Binary Tree (easy) - https://leetcode.com/problems/count-good-nodes-in-binary-tree/
+		Tương tự bài 49. DFSNode bao gồm node hiện tại và giá trị lớn nhất tính đến node đó (tại từng bước lưu giá trị max của node trước và node hiện tại)
+		
+53. 53thProblem - Course Schedule (medium) - https://leetcode.com/problems/course-schedule/
+		Bài toán kiểm tra trong đồ thị tồn tại 1 chu trình nào hay không
+		Biến đổi từ ma trận kề thành danh sách kề. Chú ý khóa first hoàn thành cần hoàn thành khóa second -> chỉ sinh danh sách kề cho khóa second.
+		Tạo 1 mảng thăm với kích thước bằng số khóa học và giá trị mặc định là chưa thăm
+		Duyệt từng khóa học, kiểm tra nó có tạo chu trình hay không bằng DFS. 
+			Nếu khóa học đã được thăm -> có chu trình
+			Đánh dấu khóa học đã thăm
+			Tìm các khóa học kề của khóa này -> DFS có chu trình -> có chu trình
+			Bỏ đánh dấu khóa học đã thăm
+			Xóa danh sách kề của khóa học này
