@@ -127,6 +127,10 @@ return max_so_far
 17. 17th Problem - Difficulty of an array - https://codingcompetitions.withgoogle.com/kickstart/round/000000000019ffc7/00000000001d3f5b
 	+ Vét cạn D từ 1 -> phần tử cuối (do dãy tăng dần). Với mỗi D kiểm tra xem số phần tử thêm vào có thỏa mãn nhỏ hơn k không => O(n^2)
 	+ Nhận xét D đã sắp xếp giảm dần, có thể dùng binary search để tìm D trong khoảng từ 0 -> v[N-1] - v[0] (đk lặp: l < r - 1) D = r => O(nlogn)
+	+ Thêm code tăng tốc tính toán
+	std::ios::sync_with_stdio(false);
+  	std::cin.tie(0);
+  	std::cout.tie(0);
 	
 18. 18th Problem - Socially Distancing - Problem D, LG code jam Online Round 1 - https://codejam.lge.com/contest/problem/609/4
 	+ Tương tự bài 17
@@ -495,3 +499,17 @@ return max_so_far
 			Tìm các khóa học kề của khóa này -> DFS có chu trình -> có chu trình
 			Bỏ đánh dấu khóa học đã thăm
 			Xóa danh sách kề của khóa học này
+
+54. 54thProblem - DIGOKEYS - Find the Treasure (medium) - https://www.spoj.com/problems/DIGOKEYS/
+		Bài toán sử dụng BFS kết hợp với sắp xếp đỉnh kề của 1 đỉnh trong đồ thị. Lưu ý đồ thị có chiều nên chỉ add 1 đỉnh trỏ đến đỉnh khác.
+		
+55. 55thProblem - Monk and the Magical Candy Bags (medium) - https://www.hackerearth.com/practice/data-structures/trees/heapspriority-queues/practice-problems/algorithm/monk-and-the-magical-candy-bags/
+		Chọn hộp nhiều kẹo ăn trước -> Sử dụng MaxHeap với K phần tử -> Time complexity: O(K*log(N))
+		
+56. 56thProblem - CLEANRBT - Cleaning Robot (medium) - https://www.spoj.com/problems/CLEANRBT/
+		- Ta đi tìm đường đi ngắn nhất từ điểm xuất phát của robot đi qua tất cả các điểm bẩn.
+		- Gọi C(i,k) là số bước robot cần để di chuyển từ vị trí điểm bẩn thứ i đến điểm bẩn thứ k; P(i) là số bước nhỏ nhất robot cần để di chuyển từ vị trí ban đầu đi qua i điểm bẩn.
+		- Với 10 điểm bẩn, có 10! ~ 4*1e6 cách chọn P(10). Ta cần tìm giá trị nhỏ nhất của các cách chọn này.
+		- Số bước để robot làm sạch i điểm bẩn = Số bước để làm sạch i – 1 điểm bẩn + số bước để đi từ điểm bẩn i-1 đến điểm bẩn i.
+		- min(P(i)) = min(P(i-1)+C(i,i-1)).
+		- Ta có thể sử dụng bfs để giải quyết bài toán này.
