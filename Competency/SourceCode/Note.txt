@@ -556,3 +556,5 @@ return max_so_far
 			- dp[i] = 2 ( i thuộc [0,8] )
 			- dp[i] = 3 ( i thuộc [9,9] )
 			- dp[i] = dp[i-9] + dp[i-10] ( i > 9 )
+		ta tính và lưu mảng dp[i] với i thuộc [0,2*10^5]
+		với số n bất kỳ, phân tích ra các chữ số khác nhau và với mỗi chữ số ta biến đổi chữ số d này thành 10 sau (10 - d) thao tác.
