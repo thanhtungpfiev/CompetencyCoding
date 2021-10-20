@@ -5,4 +5,4 @@ CONFIG -= qt
 
 SOURCES += \
         main.cpp \
-        main_copy.cpp
+#        main_copy.cpp
