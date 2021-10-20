@@ -537,3 +537,22 @@ return max_so_far
 61. 61thProblem - Jump Game II (medium) - https://leetcode.com/problems/jump-game-ii/
 		Chỉ cần xác định vị trí xa nhất có thể nhảy được. Tại mỗi lần nhảy chỉ cần update lại giá trị này thay vì phải duyệt tất cả các vị trí có thể nhảy được.
 		Ta chỉ cần update những vị trí chưa được nhảy tới. Như vậy đảm bảo được tập các vị trí của lần nhảy thứ ith phải cần tối thiểu i lần nhảy.
+		
+62. 62thProblem - House Robber (Medium) - https://leetcode.com/problems/house-robber/
+		Khi duyệt đến 1 phần tử trong mảng, ta chỉ có 2 lựa chọn là lấy hoặc không lấy. Nếu lấy thì giá trị lấy được là A[i] = A[i] + A[i-2], nếu không lấy giá trị thu được là A[i] = A[i-1]. Từ đây ta có công thức: dp[i] = max(A[i] + dp[i-2], dp[i-1]).
+		Execution time: O(N)
+		
+63. 63thProblem - Interleaving String (Medium) - https://leetcode.com/problems/interleaving-string/
+		DP table represents if s3 is interleaving at (i+j)th position when s1 is at ith position, and s2 is at jth position. 0th position means empty string.
+
+		So if both s1 and s2 is currently empty, s3 is empty too, and it is considered interleaving. If only s1 is empty, then if previous s2 position is interleaving and current s2 position char is equal to s3 current position char, it is considered interleaving. similar idea applies to when s2 is empty. when both s1 and s2 is not empty, then if we arrive i, j from i-1, j, then if i-1,j is already interleaving and i and current s3 position equal, it s interleaving. If we arrive i,j from i, j-1, then if i, j-1 is already interleaving and j and current s3 position equal. it is interleaving.
+		
+		Execution time: O(s1.length() * s2.length())
+		
+64. 64thProblem - Add One (Medium) - https://codeforces.com/problemset/problem/1513/C
+		brute-force: Lưu các chữ số của n vào 1 vector, sau mỗi thao tác tạo ra 1 số mới và cập nhật các chữ số này vào vector
+			Execution time: O(2^(M/9))
+		dp: đặt dp[i] là số chữ số sau khi áp dụng i thao tác lên 10 ta có
+			- dp[i] = 2 ( i thuộc [0,8] )
+			- dp[i] = 3 ( i thuộc [9,9] )
+			- dp[i] = dp[i-9] + dp[i-10] ( i > 9 )
