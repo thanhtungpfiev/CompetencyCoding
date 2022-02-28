@@ -11,6 +11,7 @@
 ***********************************************************************/
 #include <iostream>
 #include <vector>
+#include <climits>
 
 using namespace std;
 int maxIn3Elementh(int sum1, int sum2, int sum3)
