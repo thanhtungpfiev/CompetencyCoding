@@ -562,3 +562,8 @@ return max_so_far
 65. 65thProblem - [Code understanding] Settlement for Sponsorship - https://codepro.lge.com/exam/19/overseas-questions-for-previous-test/quiz/1
 		Bài toán tìm dãy con liên tiếp có tổng lớn nhất
 		Dưới đây là cách cài đặt thuật toán với độ phức tạp là O(n3). Với i là phần tử đầu tiên của dãy con, j là phần tử cuối cùng của dãy con, k được lặp để tính tổng của dãy con [i, j] và so sánh với best để lấy giá trị lớn nhất.
+		
+66. 66thProblem - [Code understanding] Virus Test - https://codepro.lge.com/exam/19/overseas-questions-for-previous-test/quiz/2
+		Bài toán tìm mảng con trong 1 mảng thành viên với điều kiện mảng con có thể đảo vị trí và tăng giảm thêm 1 vài đơn vị
+		Brute-force: Sắp xếp mảng B và dùng std::next_permutation (xét tất cả các khả năng có thể có của B) và search trên toàn bộ A
+		Tham lam: Sắp xếp mảng B, trích M phần tử của mảng A, sắp xếp mảng trích và tìm mảng B đã sắp xếp trên mảng trích
