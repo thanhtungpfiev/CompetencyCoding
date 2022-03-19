@@ -1,10 +1,10 @@
 TEMPLATE = subdirs
 
 SUBDIRS += \
-    1stProblem \
-    2ndProblem \
-    3rdProblem \
-    4thProblem \
+    SearchInRotatedSortedArrayII \
+    SearchInRotatedSortedArray \
+    LongestPalindromicSubstring \
+    REPROAD \
     5thProblem \
     6htProblem \
     7thProblem \
