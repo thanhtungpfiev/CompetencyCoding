@@ -1,4 +1,6 @@
 TEMPLATE = subdirs
 
 SUBDIRS += \
-    ../ExhaustiveSearch
+    BinarySearch \
+    DivideAndConquer \
+    ExhaustiveSearch

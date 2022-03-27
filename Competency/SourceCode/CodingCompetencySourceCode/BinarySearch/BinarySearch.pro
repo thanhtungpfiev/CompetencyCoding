@@ -1,7 +1,7 @@
 TEMPLATE = subdirs
 
 SUBDIRS += \
-    11thProblem \
+    ClassicalSearching \
     15thProblem \
     16thProblem \
     17thProblem \
