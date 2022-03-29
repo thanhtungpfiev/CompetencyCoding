@@ -75,6 +75,6 @@ int main()
         cin >> temp;
         v.push_back(temp);
     }
-    cout << bruteforce(v) << endl;
+    cout << searching(v) << endl;
     return 0;
 }
