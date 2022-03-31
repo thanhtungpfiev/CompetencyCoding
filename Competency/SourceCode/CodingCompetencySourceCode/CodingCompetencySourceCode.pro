@@ -4,4 +4,5 @@ SUBDIRS += \
     BinarySearch \
     DivideAndConquer \
     DynamicProgramming \
-    ExhaustiveSearch
+    ExhaustiveSearch \
+    GraphPresent
