@@ -1,8 +1,13 @@
 TEMPLATE = subdirs
 
 SUBDIRS += \
+    BFS \
     BinarySearch \
+    BinarySearchTree \
+    DFS \
     DivideAndConquer \
     DynamicProgramming \
     ExhaustiveSearch \
-    GraphPresent
+    GraphPresent \
+    Greedy \
+    Heap
