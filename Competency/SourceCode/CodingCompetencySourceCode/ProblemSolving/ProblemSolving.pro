@@ -15,3 +15,4 @@ SUBDIRS += \
     ServiceCenterTaskSimulation \
     DevelopmentOfSelfDrivingAlgorithm \
     ToAssignProjectToANewDeveloper \
+    Warehouse
