@@ -1,7 +1,10 @@
 TEMPLATE = subdirs
 
 SUBDIRS += \
+    Clearance \
+    HackingCompetition \
     PictureRecognition \
+    PopularityPoll \
     UnmannedTrain \
     RoadConstruction \
     MarioGame \
